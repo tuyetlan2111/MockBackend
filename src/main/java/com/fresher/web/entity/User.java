@@ -46,6 +46,11 @@ public class User implements Serializable {
 	@NotNull
 	@Column(name = "Email", columnDefinition = "NVARCHAR(100)")
 	private String email;
+	
+	@Basic
+	@NotNull
+	@Column(name = "Password", columnDefinition = "NVARCHAR(30)")
+	private String password;
 
 	@Basic
 	@NotNull
@@ -145,6 +150,14 @@ public class User implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getCity() {

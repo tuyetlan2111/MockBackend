@@ -28,7 +28,7 @@ public class ArtistController {
 	@Autowired
 	ArtistService artistService;
 	
-	@RequestMapping(value = "/show/", method = RequestMethod.GET)
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<List<Artist>> listAllArtist(){
 		List<Artist> listArtist= artistService.findAll();
 		if(listArtist.isEmpty()) {
@@ -46,7 +46,7 @@ public class ArtistController {
 		return artist;
 	}
 	
-	@RequestMapping(value = "/save/", method = RequestMethod.POST)
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public Artist saveContact(@Valid @RequestBody Artist artist) {
 		return artistService.save(artist);
 	}
