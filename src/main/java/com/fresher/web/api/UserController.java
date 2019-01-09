@@ -24,16 +24,16 @@ import com.fresher.web.service.UserService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-public static Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+	public static Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Autowired
 	UserService userService;
-	
+
 	@GetMapping("/show")
 	public List<User> retrieveAllUsers() {
 		return userService.findAll();
 	}
-	
+
 	@GetMapping("/show/{id}")
 	public User retrieveUser(@PathVariable int id) throws Exception {
 		Optional<User> user = userService.findById(id);
@@ -43,18 +43,18 @@ public static Logger logger = LoggerFactory.getLogger(UserController.class);
 
 		return user.get();
 	}
-	
+
 	@PostMapping("/create")
 	public ResponseEntity<Object> createUser(@RequestBody User user) {
 		User savedUser = userService.save(user);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(savedUser.getId()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
+				.toUri();
 
 		return ResponseEntity.created(location).build();
 
 	}
-	
+
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Object> updateUser(@RequestBody User user, @PathVariable int id) {
 
@@ -64,14 +64,28 @@ public static Logger logger = LoggerFactory.getLogger(UserController.class);
 			return ResponseEntity.notFound().build();
 
 		user.setId(id);
-		
+
 		userService.save(user);
 
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
 	public void deleteProduct(@PathVariable int id) {
 		userService.deleteById(id);
+	}
+
+	@PostMapping("/login")
+	public User login(String email, String password) throws Exception {
+		List<User> user = userService.findAll();
+		for (User u : user) {
+			if (u.getEmail().equals(email) && u.getPassword().equals(password)) {
+				System.out.println("Success !!!");
+			} else {
+				System.out.println("Fail !!!");
+			}
+			return u;
+		}
+		return null;
 	}
 }

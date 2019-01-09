@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,66 +29,85 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Id")
 	private int id;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "FirstName", columnDefinition = "NVARCHAR(30)")
 	private String firstName;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "LastName", columnDefinition = "NVARCHAR(30)")
 	private String lastName;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Email", columnDefinition = "NVARCHAR(100)")
 	private String email;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Password", columnDefinition = "NVARCHAR(30)")
 	private String password;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "City", columnDefinition = "NVARCHAR(30)")
 	private String city;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Country", columnDefinition = "NVARCHAR(30)")
 	private String country;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "SignupDate")
 	private Date signupDate;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "OrderCount")
 	private int orderCount;
+	
+	@Basic
+	@NotBlank
+	@NotNull
+	@Column(name = "Role")
+	private int role;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedOn")
 	private Date createdOn;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedOn")
 	private Date changedOn;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;
@@ -103,6 +123,11 @@ public class User implements Serializable {
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public User(String email, String password) {
+	    this.email = email;
+	    this.password = password;
+	  }
 
 	public User(int id, String firstName, String lastName, String email, String city, String country, Date signupDate,
 			int orderCount, Date createdOn, int createdBy, Date changedOn, int changedBy) {
@@ -190,6 +215,14 @@ public class User implements Serializable {
 
 	public void setOrderCount(int orderCount) {
 		this.orderCount = orderCount;
+	}
+
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
 	}
 
 	public Date getCreatedOn() {

@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,56 +31,67 @@ public class Product implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Id")
 	private int id;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Title", columnDefinition = "NVARCHAR(100)")
 	private String title;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Description", columnDefinition = "NVARCHAR(250)")
 	private String description;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Image", columnDefinition = "NVARCHAR(30)")
 	private String image;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Price")
 	private float price;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "QuantitySold")
 	private int quantitySold;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "AvgStars")
 	private float avgStars;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedOn")
 	private Date createdOn;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedOn")
 	private Date changedOn;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;

@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -29,56 +30,67 @@ public class Artist implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Id")
 	private int id;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "FirstName", columnDefinition="NVARCHAR(30)")
 	private String firstName;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "LastName", columnDefinition="NVARCHAR(30)")
 	private String lastName;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "LifeSpan", columnDefinition="NVARCHAR(35)")
 	private String lifeSpan;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Country", columnDefinition="NVARCHAR(30)")
 	private String country;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Description", columnDefinition="NVARCHAR(500)")
 	private String description;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "TotalProducts")
 	private int totalProducts;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedOn")
 	private Date createdOn;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedOn")
 	private Date changedOn;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,36 +28,43 @@ public class OrderDetail implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Id")
 	private int id;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Price")
 	private float price;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "quantity")
 	private int quantity;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedOn")
 	private Date createdOn;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedOn")
 	private Date changedOn;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;

@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,46 +32,55 @@ public class Order implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Id")
 	private int id;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "OrderDate")
 	private Date orderDate;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "TotalPrice")
 	private float totalPrice;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "OrderNumber")
 	private int orderNumber;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ItemCount")
 	private int itemCount;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedOn")
 	private Date createdOn;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedOn")
 	private Date changedOn;
 
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;

@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,71 +24,71 @@ public class Err implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
-	@NotNull
+	@NotBlank
 	@Column(name = "Id")
 	private int id;
 	
 	@Basic
-	@NotNull
+	@NotBlank
 	@Column(name = "UserId")
 	private int userId;
 	
 	@Basic
-	@NotNull
+	@NotBlank
 	@Column(name = "ErrorDate")
 	private Date errorDate;
 	
 	@Basic
-	@NotNull
-	@Column(name = "IpAddress", columnDefinition = "NVARCHAR(MAX)")
+	@NotBlank
+	@Column(name = "IpAddress", columnDefinition = "NVARCHAR(500)")
 	private String ipAddress;
 	
 	@Basic
-	@NotNull
-	@Column(name = "UserAgent", columnDefinition = "NVARCHAR(MAX)")
+	@NotBlank
+	@Column(name = "UserAgent", columnDefinition = "NVARCHAR(500)")
 	private String userAgent;
 	
 	@Basic
-	@NotNull
-	@Column(name = "Exception", columnDefinition = "NVARCHAR(MAX)")
+	@NotBlank
+	@Column(name = "Exception", columnDefinition = "NVARCHAR(500)")
 	private String exception;
 	
 	@Basic
-	@NotNull
-	@Column(name = "Message", columnDefinition = "NVARCHAR(MAX)")
+	@NotBlank
+	@Column(name = "Message", columnDefinition = "NVARCHAR(500)")
 	private String message;
 	
 	@Basic
-	@NotNull
-	@Column(name = "Everything", columnDefinition = "NVARCHAR(MAX)")
+	@NotBlank
+	@Column(name = "Everything", columnDefinition = "NVARCHAR(500)")
 	private String everything;
 	
 	@Basic
-	@NotNull
+	@NotBlank
 	@Column(name = "HttpReferer", columnDefinition = "NVARCHAR(500)")
 	private String httpReferer;
 	
 	@Basic
-	@NotNull
+	@NotBlank
 	@Column(name = "PathAndQuery", columnDefinition = "NVARCHAR(500)")
 	private String pathAndQuery;
 	@Basic
-	@NotNull
+	@NotBlank
 	@Column(name = "CreatedOn")
 	private Date createdOn;
 
 	@Basic
-	@NotNull
+	@NotBlank
 	@Column(name = "CreatedBy")
 	private int createdBy;
 
 	@Basic
-	@NotNull
+	@NotBlank
 	@Column(name = "ChangedOn")
 	private Date changedOn;
 
 	@Basic
-	@NotNull
+	@NotBlank
 	@Column(name = "ChangedBy")
 	private int changedBy;
 

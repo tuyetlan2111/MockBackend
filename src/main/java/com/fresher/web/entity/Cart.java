@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,41 +30,49 @@ public class Cart implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Id")
 	private int id;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "Cookie", columnDefinition = "NVARCHAR(40)")
 	private String cookie;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CartDate")
 	private Date cartDate;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ItemCount")
 	private int itemCount;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedOn")
 	private Date createdOn;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedOn")
 	private Date changedOn;
 	
 	@Basic
+	@NotBlank
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;
