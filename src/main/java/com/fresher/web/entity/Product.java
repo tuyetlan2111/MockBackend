@@ -100,6 +100,10 @@ public class Product implements Serializable{
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy= "product")
 	private Collection<OrderDetail> orderDetailCollection;
 	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy= "product")
+	private Collection<CartItem> cartItemCollection;
+	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "ArtistId", referencedColumnName="Id")
 	private Artist artist;
@@ -216,6 +220,14 @@ public class Product implements Serializable{
 
 	public void setOrderDetailCollection(Collection<OrderDetail> orderDetailCollection) {
 		this.orderDetailCollection = orderDetailCollection;
+	}
+
+	public Collection<CartItem> getCartItemCollection() {
+		return cartItemCollection;
+	}
+
+	public void setCartItemCollection(Collection<CartItem> cartItemCollection) {
+		this.cartItemCollection = cartItemCollection;
 	}
 
 	public Artist getArtist() {

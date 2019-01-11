@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.fresher.web.entity.Order;
 import com.fresher.web.entity.OrderDetail;
 import com.fresher.web.service.OrderDetailService;
-import com.fresher.web.service.OrderService;
 
 public class OrderDetailController {
 public static Logger logger = LoggerFactory.getLogger(OrderDetailController.class);

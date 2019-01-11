@@ -80,6 +80,21 @@ public class Cart implements Serializable{
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="cart")
 	private Collection<CartItem> cartItemCollection;
+	
+	public Cart() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Cart(int id, String cookie, Date cartDate, int itemCount, Date createdOn, int createdBy, Date changedOn, int changedBy) {
+		this.id = id; 
+		this.cookie = cookie;
+		this.cartDate = cartDate;
+		this.itemCount = itemCount;
+		this.createdOn = createdOn;
+		this.createdBy = createdBy;
+		this.changedOn = changedOn;
+		this.changedBy = changedBy;
+	}
 
 	public int getId() {
 		return id;

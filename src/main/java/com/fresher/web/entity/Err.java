@@ -27,47 +27,47 @@ public class Err implements Serializable {
 	@NotBlank
 	@Column(name = "Id")
 	private int id;
-	
+
 	@Basic
 	@NotBlank
 	@Column(name = "UserId")
 	private int userId;
-	
+
 	@Basic
 	@NotBlank
 	@Column(name = "ErrorDate")
 	private Date errorDate;
-	
+
 	@Basic
 	@NotBlank
 	@Column(name = "IpAddress", columnDefinition = "NVARCHAR(500)")
 	private String ipAddress;
-	
+
 	@Basic
 	@NotBlank
 	@Column(name = "UserAgent", columnDefinition = "NVARCHAR(500)")
 	private String userAgent;
-	
+
 	@Basic
 	@NotBlank
 	@Column(name = "Exception", columnDefinition = "NVARCHAR(500)")
 	private String exception;
-	
+
 	@Basic
 	@NotBlank
 	@Column(name = "Message", columnDefinition = "NVARCHAR(500)")
 	private String message;
-	
+
 	@Basic
 	@NotBlank
 	@Column(name = "Everything", columnDefinition = "NVARCHAR(500)")
 	private String everything;
-	
+
 	@Basic
 	@NotBlank
 	@Column(name = "HttpReferer", columnDefinition = "NVARCHAR(500)")
 	private String httpReferer;
-	
+
 	@Basic
 	@NotBlank
 	@Column(name = "PathAndQuery", columnDefinition = "NVARCHAR(500)")
@@ -91,6 +91,29 @@ public class Err implements Serializable {
 	@NotBlank
 	@Column(name = "ChangedBy")
 	private int changedBy;
+
+	public Err() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Err(int id, int userId, Date errorDate, String ipAddress, String userAgent, String exception, String message,
+			String everything, String httpReferer, String pathAndQuery, Date createdOn, int createdBy, Date changedOn,
+			int changedBy) {
+		this.id = id;
+		this.userId = userId;
+		this.errorDate = errorDate;
+		this.ipAddress = ipAddress;
+		this.userAgent = userAgent;
+		this.exception = exception;
+		this.message = message;
+		this.everything = everything;
+		this.httpReferer = httpReferer;
+		this.pathAndQuery = pathAndQuery;
+		this.createdOn = createdOn;
+		this.createdBy = createdBy;
+		this.changedOn = changedOn;
+		this.changedBy = changedBy;
+	}
 
 	public int getId() {
 		return id;
