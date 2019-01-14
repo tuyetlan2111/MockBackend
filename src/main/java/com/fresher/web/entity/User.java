@@ -48,7 +48,7 @@ public class User implements Serializable {
 	@NotNull
 	@Column(name = "Email", columnDefinition = "NVARCHAR(100)")
 	private String email;
-	
+
 	@Basic
 	@NotNull
 	@Column(name = "Password", columnDefinition = "NVARCHAR(30)")
@@ -73,7 +73,7 @@ public class User implements Serializable {
 	@NotNull
 	@Column(name = "OrderCount")
 	private int orderCount;
-	
+
 	@Basic
 	@NotNull
 	@Column(name = "Role")
@@ -82,7 +82,7 @@ public class User implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CreatedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "CreatedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdOn;
 
 	@Basic
@@ -93,7 +93,7 @@ public class User implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ChangedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "ChangedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date changedOn;
 
 	@Basic
@@ -110,28 +110,32 @@ public class User implements Serializable {
 	private Collection<Rating> ratingCollection;
 
 	public User() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public User(String email, String password) {
-	    this.email = email;
-	    this.password = password;
-	  }
 
-	public User(int id, String firstName, String lastName, String email, String city, String country, Date signupDate,
-			int orderCount, Date createdOn, int createdBy, Date changedOn, int changedBy) {
+	public User(@NotNull int id, @NotNull String firstName, @NotNull String lastName, @NotNull String email,
+			@NotNull String password, @NotNull String city, @NotNull String country, @NotNull Date signupDate,
+			@NotNull int orderCount, @NotNull int role, @NotNull Date createdOn, @NotNull int createdBy,
+			@NotNull Date changedOn, @NotNull int changedBy, Collection<Order> orderCollection,
+			Collection<Rating> ratingCollection) {
+		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.password = password;
 		this.city = city;
 		this.country = country;
 		this.signupDate = signupDate;
 		this.orderCount = orderCount;
+		this.role = role;
 		this.createdOn = createdOn;
 		this.createdBy = createdBy;
 		this.changedOn = changedOn;
 		this.changedBy = changedBy;
+		this.orderCollection = orderCollection;
+		this.ratingCollection = ratingCollection;
 	}
 
 	public int getId() {
@@ -261,4 +265,14 @@ public class User implements Serializable {
 	public void setRatingCollection(Collection<Rating> ratingCollection) {
 		this.ratingCollection = ratingCollection;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", city=" + city + ", country=" + country + ", signupDate=" + signupDate
+				+ ", orderCount=" + orderCount + ", role=" + role + ", createdOn=" + createdOn + ", createdBy="
+				+ createdBy + ", changedOn=" + changedOn + ", changedBy=" + changedBy + ", orderCollection="
+				+ orderCollection + ", ratingCollection=" + ratingCollection + "]";
+	}
+
 }

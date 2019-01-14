@@ -46,7 +46,7 @@ public class CartItem implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CreatedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "CreatedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdOn;
 
 	@Basic
@@ -57,14 +57,14 @@ public class CartItem implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ChangedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "ChangedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date changedOn;
 
 	@Basic
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "ProductId", referencedColumnName = "Id")
 	private Product product;
@@ -74,11 +74,13 @@ public class CartItem implements Serializable {
 	private Cart cart;
 
 	public CartItem() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CartItem(int id, int productId, float price, int quantity, Date createdOn, int createdBy, Date changedOn,
-			int changedBy) {
+	public CartItem(@NotNull int id, @NotNull float price, @NotNull int quantity, @NotNull Date createdOn,
+			@NotNull int createdBy, @NotNull Date changedOn, @NotNull int changedBy, Product product, Cart cart) {
+		super();
 		this.id = id;
 		this.price = price;
 		this.quantity = quantity;
@@ -86,6 +88,8 @@ public class CartItem implements Serializable {
 		this.createdBy = createdBy;
 		this.changedOn = changedOn;
 		this.changedBy = changedBy;
+		this.product = product;
+		this.cart = cart;
 	}
 
 	public int getId() {
@@ -159,4 +163,12 @@ public class CartItem implements Serializable {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+
+	@Override
+	public String toString() {
+		return "CartItem [id=" + id + ", price=" + price + ", quantity=" + quantity + ", createdOn=" + createdOn
+				+ ", createdBy=" + createdBy + ", changedOn=" + changedOn + ", changedBy=" + changedBy + ", product="
+				+ product + ", cart=" + cart + "]";
+	}
+
 }

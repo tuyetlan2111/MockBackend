@@ -22,63 +22,68 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "RATING")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class Rating implements Serializable{
+public class Rating implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
 	@NotNull
 	@Column(name = "Id")
 	private int id;
-	
+
 	@Basic
 	@NotNull
 	@Column(name = "Stars")
 	private int stars;
-	
+
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CreatedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "CreatedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdOn;
-	
+
 	@Basic
 	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
-	
+
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ChangedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "ChangedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date changedOn;
-	
+
 	@Basic
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name= "ProductId", referencedColumnName = "Id")
+	@JoinColumn(name = "ProductId", referencedColumnName = "Id")
 	private Product product;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "UserId", referencedColumnName = "Id")
 	private User user;
-	
+
 	public Rating() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Rating(int id, int stars, Date createdOn, int createdBy, Date changedOn, int changedBy) {
+
+	public Rating(@NotNull int id, @NotNull int stars, @NotNull Date createdOn, @NotNull int createdBy,
+			@NotNull Date changedOn, @NotNull int changedBy, Product product, User user) {
+		super();
 		this.id = id;
 		this.stars = stars;
 		this.createdOn = createdOn;
 		this.createdBy = createdBy;
 		this.changedOn = changedOn;
 		this.changedBy = changedBy;
+		this.product = product;
+		this.user = user;
 	}
 
 	public int getId() {
@@ -144,4 +149,12 @@ public class Rating implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+		return "Rating [id=" + id + ", stars=" + stars + ", createdOn=" + createdOn + ", createdBy=" + createdBy
+				+ ", changedOn=" + changedOn + ", changedBy=" + changedBy + ", product=" + product + ", user=" + user
+				+ "]";
+	}
+
 }

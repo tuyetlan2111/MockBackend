@@ -46,7 +46,7 @@ public class OrderDetail implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CreatedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "CreatedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdOn;
 
 	@Basic
@@ -57,7 +57,7 @@ public class OrderDetail implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ChangedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "ChangedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date changedOn;
 
 	@Basic
@@ -74,11 +74,14 @@ public class OrderDetail implements Serializable {
 	private Order orderProduct;
 
 	public OrderDetail() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public OrderDetail(int id, float price, int quantity, Date createdOn, int createdBy, Date changedOn,
-			int changedBy) {
+	public OrderDetail(@NotNull int id, @NotNull float price, @NotNull int quantity, @NotNull Date createdOn,
+			@NotNull int createdBy, @NotNull Date changedOn, @NotNull int changedBy, Product product,
+			Order orderProduct) {
+		super();
 		this.id = id;
 		this.price = price;
 		this.quantity = quantity;
@@ -86,6 +89,8 @@ public class OrderDetail implements Serializable {
 		this.createdBy = createdBy;
 		this.changedOn = changedOn;
 		this.changedBy = changedBy;
+		this.product = product;
+		this.orderProduct = orderProduct;
 	}
 
 	public int getId() {
@@ -159,4 +164,12 @@ public class OrderDetail implements Serializable {
 	public void setOrderProduct(Order orderProduct) {
 		this.orderProduct = orderProduct;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderDetail [id=" + id + ", price=" + price + ", quantity=" + quantity + ", createdOn=" + createdOn
+				+ ", createdBy=" + createdBy + ", changedOn=" + changedOn + ", changedBy=" + changedBy + ", product="
+				+ product + ", orderProduct=" + orderProduct + "]";
+	}
+
 }

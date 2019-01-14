@@ -60,7 +60,7 @@ public class Order implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CreatedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "CreatedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdOn;
 
 	@Basic
@@ -71,7 +71,7 @@ public class Order implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ChangedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "ChangedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date changedOn;
 
 	@Basic
@@ -88,11 +88,14 @@ public class Order implements Serializable {
 	private User user;
 
 	public Order() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Order(int id, Date orderDate, float totalPrice, int orderNumber, int itemCount, Date createdOn,
-			int createdBy, Date changedOn, int changedBy) {
+	public Order(@NotNull int id, @NotNull Date orderDate, @NotNull float totalPrice, @NotNull int orderNumber,
+			@NotNull int itemCount, @NotNull Date createdOn, @NotNull int createdBy, @NotNull Date changedOn,
+			@NotNull int changedBy, Collection<OrderDetail> orderDetailCollection, User user) {
+		super();
 		this.id = id;
 		this.orderDate = orderDate;
 		this.totalPrice = totalPrice;
@@ -102,6 +105,8 @@ public class Order implements Serializable {
 		this.createdBy = createdBy;
 		this.changedOn = changedOn;
 		this.changedBy = changedBy;
+		this.orderDetailCollection = orderDetailCollection;
+		this.user = user;
 	}
 
 	public int getId() {
@@ -191,4 +196,13 @@ public class Order implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", orderDate=" + orderDate + ", totalPrice=" + totalPrice + ", orderNumber="
+				+ orderNumber + ", itemCount=" + itemCount + ", createdOn=" + createdOn + ", createdBy=" + createdBy
+				+ ", changedOn=" + changedOn + ", changedBy=" + changedBy + ", orderDetailCollection="
+				+ orderDetailCollection + ", user=" + user + "]";
+	}
+
 }

@@ -74,11 +74,11 @@ public class Err implements Serializable {
 	@NotNull
 	@Column(name = "PathAndQuery", columnDefinition = "NVARCHAR(500)")
 	private String pathAndQuery;
-	
+
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CreatedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "CreatedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdOn;
 
 	@Basic
@@ -89,7 +89,7 @@ public class Err implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "ChangedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "ChangedOn", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date changedOn;
 
 	@Basic
@@ -98,12 +98,15 @@ public class Err implements Serializable {
 	private int changedBy;
 
 	public Err() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Err(int id, int userId, Date errorDate, String ipAddress, String userAgent, String exception, String message,
-			String everything, String httpReferer, String pathAndQuery, Date createdOn, int createdBy, Date changedOn,
-			int changedBy) {
+	public Err(@NotNull int id, @NotNull int userId, @NotNull Date errorDate, @NotNull String ipAddress,
+			@NotNull String userAgent, @NotNull String exception, @NotNull String message, @NotNull String everything,
+			@NotNull String httpReferer, @NotNull String pathAndQuery, @NotNull Date createdOn, @NotNull int createdBy,
+			@NotNull Date changedOn, @NotNull int changedBy) {
+		super();
 		this.id = id;
 		this.userId = userId;
 		this.errorDate = errorDate;
@@ -231,4 +234,14 @@ public class Err implements Serializable {
 	public void setChangedBy(int changedBy) {
 		this.changedBy = changedBy;
 	}
+
+	@Override
+	public String toString() {
+		return "Err [id=" + id + ", userId=" + userId + ", errorDate=" + errorDate + ", ipAddress=" + ipAddress
+				+ ", userAgent=" + userAgent + ", exception=" + exception + ", message=" + message + ", everything="
+				+ everything + ", httpReferer=" + httpReferer + ", pathAndQuery=" + pathAndQuery + ", createdOn="
+				+ createdOn + ", createdBy=" + createdBy + ", changedOn=" + changedOn + ", changedBy=" + changedBy
+				+ "]";
+	}
+
 }
