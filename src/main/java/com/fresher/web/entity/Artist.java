@@ -1,6 +1,7 @@
 package com.fresher.web.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
@@ -12,7 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,87 +26,86 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "ARTIST")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Artist implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "Id")
 	private int id;
-	
+
 	@Basic
-	@NotBlank
 	@NotNull
-	@Column(name = "FirstName", columnDefinition="NVARCHAR(30)")
+	@Column(name = "FirstName", columnDefinition = "NVARCHAR(30)")
 	private String firstName;
-	
+
 	@Basic
-	@NotBlank
 	@NotNull
-	@Column(name = "LastName", columnDefinition="NVARCHAR(30)")
+	@Column(name = "LastName", columnDefinition = "NVARCHAR(30)")
 	private String lastName;
-	
+
 	@Basic
-	@NotBlank
 	@NotNull
-	@Column(name = "LifeSpan", columnDefinition="NVARCHAR(35)")
+	@Column(name = "LifeSpan", columnDefinition = "NVARCHAR(35)")
 	private String lifeSpan;
-	
+
 	@Basic
-	@NotBlank
 	@NotNull
-	@Column(name = "Country", columnDefinition="NVARCHAR(30)")
+	@Column(name = "Country", columnDefinition = "NVARCHAR(30)")
 	private String country;
-	
+
 	@Basic
-	@NotBlank
 	@NotNull
-	@Column(name = "Description", columnDefinition="NVARCHAR(500)")
+	@Column(name = "Description", columnDefinition = "NVARCHAR(500)")
 	private String description;
-	
+
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "TotalProducts")
 	private int totalProducts;
-	
-	@Basic
-	@NotBlank
+
+	@Basic(optional = false)
 	@NotNull
-	@Column(name = "CreatedOn")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CreatedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdOn;
-	
+
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
-	
-	@Basic
-	@NotBlank
+
+	@Basic(optional = false)
 	@NotNull
-	@Column(name = "ChangedOn")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "ChangedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date changedOn;
-	
+
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="artist")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "artist")
 	private Collection<Product> productCollection;
-	
+
 	public Artist() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	
-	public Artist(int id, String firstName, String lastName, String lifeSpan, String country, String description, int totalProducts, Date createdOn, int createdBy, Date changedOn, int changedBy) {
-		this.id = id; 
+
+
+	public Artist(@NotNull int id, @NotNull String firstName, @NotNull String lastName, @NotNull String lifeSpan,
+			@NotNull String country, @NotNull String description, @NotNull int totalProducts, @NotNull Date createdOn,
+			@NotNull int createdBy, @NotNull Date changedOn, @NotNull int changedBy,
+			Collection<Product> productCollection) {
+		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.lifeSpan = lifeSpan;
@@ -115,7 +116,11 @@ public class Artist implements Serializable {
 		this.createdBy = createdBy;
 		this.changedOn = changedOn;
 		this.changedBy = changedBy;
+		this.productCollection = productCollection;
 	}
+
+
+
 
 	public int getId() {
 		return id;
@@ -212,6 +217,13 @@ public class Artist implements Serializable {
 	public void setProductCollection(Collection<Product> productCollection) {
 		this.productCollection = productCollection;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Artist [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", lifeSpan=" + lifeSpan
+				+ ", country=" + country + ", description=" + description + ", totalProducts=" + totalProducts
+				+ ", createdOn=" + createdOn + ", createdBy=" + createdBy + ", changedOn=" + changedOn + ", changedBy="
+				+ changedBy + ", productCollection=" + productCollection + "]";
+	}
+
 }

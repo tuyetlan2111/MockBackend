@@ -10,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,71 +26,74 @@ public class Err implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "Id")
 	private int id;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "UserId")
 	private int userId;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "ErrorDate")
 	private Date errorDate;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "IpAddress", columnDefinition = "NVARCHAR(500)")
 	private String ipAddress;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "UserAgent", columnDefinition = "NVARCHAR(500)")
 	private String userAgent;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "Exception", columnDefinition = "NVARCHAR(500)")
 	private String exception;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "Message", columnDefinition = "NVARCHAR(500)")
 	private String message;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "Everything", columnDefinition = "NVARCHAR(500)")
 	private String everything;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "HttpReferer", columnDefinition = "NVARCHAR(500)")
 	private String httpReferer;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "PathAndQuery", columnDefinition = "NVARCHAR(500)")
 	private String pathAndQuery;
-	@Basic
-	@NotBlank
-	@Column(name = "CreatedOn")
+	
+	@Basic(optional = false)
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CreatedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdOn;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
 
-	@Basic
-	@NotBlank
-	@Column(name = "ChangedOn")
+	@Basic(optional = false)
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "ChangedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date changedOn;
 
 	@Basic
-	@NotBlank
+	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;
 

@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -31,67 +33,58 @@ public class Product implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "Id")
 	private int id;
 	
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "Title", columnDefinition = "NVARCHAR(100)")
 	private String title;
 	
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "Description", columnDefinition = "NVARCHAR(250)")
 	private String description;
 	
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "Image", columnDefinition = "NVARCHAR(30)")
 	private String image;
 	
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "Price")
 	private float price;
 	
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "QuantitySold")
 	private int quantitySold;
 	
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "AvgStars")
 	private float avgStars;
 
-	@Basic
-	@NotBlank
+	@Basic(optional = false)
 	@NotNull
-	@Column(name = "CreatedOn")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CreatedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdOn;
 	
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "CreatedBy")
 	private int createdBy;
 	
-	@Basic
-	@NotBlank
+	@Basic(optional = false)
 	@NotNull
-	@Column(name = "ChangedOn")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "ChangedOn", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date changedOn;
 	
 	@Basic
-	@NotBlank
 	@NotNull
 	@Column(name = "ChangedBy")
 	private int changedBy;
@@ -107,12 +100,18 @@ public class Product implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "ArtistId", referencedColumnName="Id")
 	private Artist artist;
-	
+
 	public Product() {
+		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Product(int id, String title, String description, String image, float price, int quantitySold, float avgStars, Date createdOn, int createdBy, Date changedOn, int changedBy) {
+
+	public Product(@NotBlank @NotNull int id, @NotBlank @NotNull String title, @NotBlank @NotNull String description,
+			@NotBlank @NotNull String image, @NotBlank @NotNull float price, @NotBlank @NotNull int quantitySold,
+			@NotBlank @NotNull float avgStars, @NotBlank @NotNull Date createdOn, @NotBlank @NotNull int createdBy,
+			@NotBlank @NotNull Date changedOn, @NotBlank @NotNull int changedBy,
+			Collection<OrderDetail> orderDetailCollection, Collection<CartItem> cartItemCollection, Artist artist) {
+		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -124,6 +123,9 @@ public class Product implements Serializable{
 		this.createdBy = createdBy;
 		this.changedOn = changedOn;
 		this.changedBy = changedBy;
+		this.orderDetailCollection = orderDetailCollection;
+		this.cartItemCollection = cartItemCollection;
+		this.artist = artist;
 	}
 
 	public int getId() {
@@ -237,4 +239,15 @@ public class Product implements Serializable{
 	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", title=" + title + ", description=" + description + ", image=" + image
+				+ ", price=" + price + ", quantitySold=" + quantitySold + ", avgStars=" + avgStars + ", createdOn="
+				+ createdOn + ", createdBy=" + createdBy + ", changedOn=" + changedOn + ", changedBy=" + changedBy
+				+ ", orderDetailCollection=" + orderDetailCollection + ", cartItemCollection=" + cartItemCollection
+				+ ", artist=" + artist + "]";
+	}
+	
+	
 }
