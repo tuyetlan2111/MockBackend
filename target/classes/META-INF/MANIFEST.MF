@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: Fresher_Frontend
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: TungNM12
+Built-By: ThuongBV
 Implementation-Vendor-Id: com.fresher
-Build-Jdk: 1.8.0_151
+Build-Jdk: 1.8.0_101
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/Fresher_Frontend
 Created-By: Maven Integration for Eclipse
