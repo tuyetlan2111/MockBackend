@@ -1,7 +1,6 @@
 package com.fresher.web.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 

@@ -77,4 +77,17 @@ public class ProductController {
 	public void deleteProduct(@PathVariable int id) {
 		productService.deleteById(id);
 	}
+	
+	@RequestMapping("/search/title/{title}")
+    public List<Product> getFilteredTitle(@PathVariable String title) {
+ 
+        return productService.findByTitle(title);
+    }
+	
+	@RequestMapping("/search/price/{price}")
+    public List<Product> getFilteredPrice(@PathVariable int price) {
+ 
+        return productService.findByPrice(price);
+    }
+
 }
