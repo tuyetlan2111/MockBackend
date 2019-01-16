@@ -37,6 +37,7 @@ public class ArtistController {
 		return artistService.findAll();
 	}
 	
+	
 	@GetMapping("/show/{id}")
 	public Artist retrieveArtist(@PathVariable int id) throws Exception {
 		Optional<Artist> artist = artistService.findById(id);
