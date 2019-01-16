@@ -36,12 +36,12 @@ public class User implements Serializable {
 
 	@Basic
 	@NotNull
-	@Column(name = "FirstName", columnDefinition = "NVARCHAR(30)")
+	@Column(name = "FirstName", columnDefinition = "NVARCHAR(300)")
 	private String firstName;
 
 	@Basic
 	@NotNull
-	@Column(name = "LastName", columnDefinition = "NVARCHAR(30)")
+	@Column(name = "LastName", columnDefinition = "NVARCHAR(300)")
 	private String lastName;
 
 	@Basic
@@ -51,7 +51,7 @@ public class User implements Serializable {
 
 	@Basic
 	@NotNull
-	@Column(name = "Password", columnDefinition = "NVARCHAR(30)")
+	@Column(name = "Password", columnDefinition = "NVARCHAR(100)")
 	private String password;
 
 	@Basic
