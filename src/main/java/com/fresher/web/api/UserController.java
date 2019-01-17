@@ -47,15 +47,9 @@ public class UserController {
 	}
 	@GetMapping("/login/{email}/{password}")
 	public User retrieveUser(@PathVariable String email, @PathVariable String password) throws Exception {
-		List<User> users= userService.findAll();
-		return users.get(0);
-//		for (User user2 : users) {
-//			if(user2.getEmail()== email  && user2.getPassword() == (password)) {
-//				return user2;
-//			}
-//		}
+		User user = userService.findByEmailAndPassword(email, password);
 		
-		//return null;
+		return user;
 	}
 	@PostMapping("/create")
 	@CrossOrigin(origins = "http://localhost:4200")
