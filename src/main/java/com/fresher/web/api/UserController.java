@@ -51,19 +51,27 @@ public class UserController {
 		
 		return user;
 	}
+	@GetMapping("/password/{old_password}/{password}")
+	public User registerUser(@PathVariable String old_password, @PathVariable String password) throws Exception {
+		//User user = userService.findByEmailAndPassword(email, password);
+		//User savedUser = userService.save(user);
+
+		return null;
+	}
 	@PostMapping("/create")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Object> createUser(@RequestBody User user) {
+	public User createUser(@RequestBody User user) {
 		User savedUser = userService.save(user);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
 				.toUri();
 
-		return ResponseEntity.created(location).build();
+		return savedUser;
 
 	}
 
 	@PutMapping("/update/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Object> updateUser(@RequestBody User user, @PathVariable int id) {
 
 		Optional<User> userOptional = userService.findById(id);
