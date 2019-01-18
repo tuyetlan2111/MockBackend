@@ -1,6 +1,7 @@
 package com.fresher.web.api;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fresher.web.entity.Cart;
 import com.fresher.web.entity.CartItem;
 import com.fresher.web.service.CartItemService;
+import com.fresher.web.service.CartService;
 
 @RestController
 @RequestMapping("/cartItem")
@@ -31,22 +34,24 @@ public class CartItemController {
 
 	@Autowired
 	CartItemService cartItemService;
+	
+	@Autowired
+	CartService cartService;
 
 	@GetMapping("/show")
 	public List<CartItem> retrieveAllCartItems() {
 		return cartItemService.findAll();
 	}
 
-	@GetMapping("/show/{id}")
-	public CartItem retrieveCartItem(@PathVariable int id) throws Exception {
-		Optional<CartItem> cartItem = cartItemService.findById(id);
-
-		if (!cartItem.isPresent())
-			throw new Exception("id-" + id);
-
-		return cartItem.get();
+	@GetMapping("/show/{cookie}")
+	public List<CartItem> retrieveCartItem(@PathVariable String cookie) throws Exception {
+		Cart cart = cartService.findByCookie(cookie);
+		List<CartItem> cartItems = new ArrayList<>();
+		if(cart!= null) {
+			cartItems = cartItemService.findByCartId(cart.getId());
+		}
+		return cartItems;
 	}
-
 	@PostMapping("/create")
 	public ResponseEntity<Object> createCartItem(@RequestBody CartItem cartItem) {
 		CartItem savedCartItem = cartItemService.save(cartItem);
@@ -57,6 +62,21 @@ public class CartItemController {
 		return ResponseEntity.created(location).build();
 
 	}
+	@PostMapping("/check-set-cart-item")
+	public CartItem checkSetCartItem(@RequestBody CartItem cartItem) {
+		CartItem newCartItem = cartItemService.findByProductIdAndCartId(cartItem.getProduct().getId(),cartItem.getCart().getId());
+		if(newCartItem == null) {
+			newCartItem = cartItemService.save(cartItem);
+		}else {
+			int num = cartItem.getQuantity() + newCartItem.getQuantity();
+			newCartItem.setQuantity(num);
+			newCartItem = cartItemService.save(newCartItem);
+		}
+
+		return cartItem;
+
+	}
+
 
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Object> updateCartItem(@RequestBody CartItem cartItem, @PathVariable int id) {

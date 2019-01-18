@@ -51,12 +51,15 @@ public class UserController {
 		
 		return user;
 	}
-	@GetMapping("/password/{old_password}/{password}")
-	public User registerUser(@PathVariable String old_password, @PathVariable String password) throws Exception {
-		//User user = userService.findByEmailAndPassword(email, password);
-		//User savedUser = userService.save(user);
+	@GetMapping("/password/{email}/{old_password}/{password}")
+	public User registerUser(@PathVariable String email,@PathVariable String old_password, @PathVariable String password) throws Exception {
+		User user = userService.findByEmailAndPassword(email, old_password);
+		if(user!=null) {
+			user.setPassword(password);
+			user = userService.save(user);
+		}
 
-		return null;
+		return user;
 	}
 	@PostMapping("/create")
 	@CrossOrigin(origins = "http://localhost:4200")

@@ -57,7 +57,22 @@ public class CartController {
 		return ResponseEntity.created(location).build();
 
 	}
+	@PostMapping("/check-set-cart")
+	public Cart checkSetCart(@RequestBody Cart cart) {
+		Cart  savedCart = cartService.findByCookie(cart.getCookie());
+		if (savedCart == null) {
+			savedCart = cartService.save(cart);
+		}
+		return savedCart;
 
+	}
+	@GetMapping("/check-cart/{cookie}")
+	public Cart checkCart(@PathVariable String cookie) {
+		Cart  savedCart = cartService.findByCookie(cookie);
+		return savedCart;
+
+	}
+	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Object> updateCart(@RequestBody Cart cart, @PathVariable int id) {
 
