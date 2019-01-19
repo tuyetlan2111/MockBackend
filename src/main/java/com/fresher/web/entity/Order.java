@@ -91,7 +91,17 @@ public class Order implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Order(Payment payment) {
+		this.orderDate = payment.getCreatedOn();
+		this.createdOn = payment.getCreatedOn();
+		this.createdBy = payment.getCreatedBy();
+		this.changedOn = payment.getChangedOn();
+		this.changedBy = payment.getChangedBy();
+		this.totalPrice = payment.getTotalPrice();
+		this.user = payment.getUser();
 
+	}
+	
 	public Order(@NotNull int id, @NotNull Date orderDate, @NotNull float totalPrice, @NotNull int orderNumber,
 			@NotNull int itemCount, @NotNull Date createdOn, @NotNull int createdBy, @NotNull Date changedOn,
 			@NotNull int changedBy, Collection<OrderDetail> orderDetailCollection, User user) {

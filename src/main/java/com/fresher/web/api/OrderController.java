@@ -37,14 +37,10 @@ public static Logger logger = LoggerFactory.getLogger(OrderController.class);
 		return orderService.findAll();
 	}
 	
-	@GetMapping("/show/{id}")
-	public Order retrieveProduct(@PathVariable int id) throws Exception {
-		Optional<Order> order = orderService.findById(id);
+	@GetMapping("/show/{user_id}")
+	public List<Order> retrieveProduct(@PathVariable int user_id) throws Exception {
+		return orderService.findByUserId(user_id);
 
-		if (!order.isPresent())
-			throw new Exception("id-" + id);
-
-		return order.get();
 	}
 	
 	@PostMapping("/create")

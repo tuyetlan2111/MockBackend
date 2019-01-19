@@ -92,6 +92,16 @@ public class OrderDetail implements Serializable {
 		this.product = product;
 		this.orderProduct = orderProduct;
 	}
+	public OrderDetail(CartItem cartItem, Order order) {
+		this.price = cartItem.getPrice();
+		this.quantity = cartItem.getQuantity();
+		this.createdOn = cartItem.getCreatedOn();
+		this.createdBy = cartItem.getCreatedBy();
+		this.changedOn = cartItem.getChangedOn();
+		this.changedBy = cartItem.getCreatedBy();
+		this.product = cartItem.getProduct();
+		this.orderProduct = order;
+	}
 
 	public int getId() {
 		return id;
