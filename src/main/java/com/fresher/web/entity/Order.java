@@ -98,6 +98,7 @@ public class Order implements Serializable {
 		this.changedOn = payment.getChangedOn();
 		this.changedBy = payment.getChangedBy();
 		this.totalPrice = payment.getTotalPrice();
+		this.orderNumber = payment.getOrder().getOrderNumber();
 		this.user = payment.getUser();
 
 	}

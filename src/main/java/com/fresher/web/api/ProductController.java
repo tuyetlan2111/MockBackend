@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fresher.web.entity.Product;
 import com.fresher.web.service.ProductService;
+import com.fresher.web.service.RatingService;
 
 @RestController
 @RequestMapping("/product")
@@ -31,19 +32,29 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
+	@Autowired
+	RatingService ratingService;
 	
 	@GetMapping("/show")
 	public List<Product> retrieveAllProducts() {
 		return productService.findAll();
 	}
+	@GetMapping("/show/{artist_id}/{star}/{price_min}/{price_max}")
+	public List<Product> retrieveAllProductsByQuery( @PathVariable int artist_id,  @PathVariable int star, @PathVariable int price_min, @PathVariable int price_max) {
+		String artist_query ="";
+		if(artist_id != 0) {
+			artist_query = "artist_id = " + artist_id;
+		}
+		String query =" where " + artist_query+ " and avg_stars >= " + star + " and price >= " + price_min + " and price <= " + price_max;
+		
+		return productService.findAllProductsByQuery(query);
+	}
+	
 	
 	@GetMapping("/show/{id}")
 	public Product retrieveProduct(@PathVariable int id) throws Exception {
 		Optional<Product> product = productService.findById(id);
-
-		if (!product.isPresent())
-			throw new Exception("id-" + id);
-
+		
 		return product.get();
 	}
 	

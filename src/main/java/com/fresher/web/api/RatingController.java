@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fresher.web.entity.Product;
 import com.fresher.web.entity.Rating;
+import com.fresher.web.service.ProductService;
 import com.fresher.web.service.RatingService;
 
 @RestController
@@ -31,25 +33,34 @@ public class RatingController {
 	@Autowired
 	RatingService ratingService;
 
+	@Autowired
+	ProductService productService;
+	
 	@GetMapping("/show")
 	public List<Rating> retrieveAllRatings() {
 		return ratingService.findAll();
 	}
 
 	@GetMapping("/show/{id}")
-	public Rating retrieveRating(@PathVariable int id) throws Exception {
-		Optional<Rating> rating = ratingService.findById(id);
+	public List<Rating> retrieveRating(@PathVariable int id) throws Exception {
+		List<Rating> ratings = ratingService.findByProductId(id);
 
-		if (!rating.isPresent())
-			throw new Exception("id-" + id);
-
-		return rating.get();
+		return ratings;
 	}
-
+	@GetMapping("/avg/{id}")
+	public int getRatingProduct(@PathVariable int id) throws Exception {
+		int rating = ratingService.getAverageRating(id);
+		return rating;
+	}
 	@PostMapping("/create")
 	public ResponseEntity<Object> createRating(@RequestBody Rating rating) {
 		Rating savedRating = ratingService.save(rating);
-
+		Product product = rating.getProduct();
+		int star = ratingService.getAverageRating(product.getId());
+		
+		product.setAvgStars(star);
+		productService.save(product);
+		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(savedRating.getId()).toUri();
 

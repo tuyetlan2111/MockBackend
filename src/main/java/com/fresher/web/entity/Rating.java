@@ -37,6 +37,11 @@ public class Rating implements Serializable {
 	@NotNull
 	@Column(name = "Stars")
 	private int stars;
+	
+	@Basic
+	@NotNull
+	@Column(name = "Content")
+	private String content;
 
 	@Basic(optional = false)
 	@NotNull
@@ -74,7 +79,7 @@ public class Rating implements Serializable {
 	}
 
 	public Rating(@NotNull int id, @NotNull int stars, @NotNull Date createdOn, @NotNull int createdBy,
-			@NotNull Date changedOn, @NotNull int changedBy, Product product, User user) {
+			@NotNull Date changedOn, @NotNull int changedBy,@NotNull String content , Product product, User user) {
 		super();
 		this.id = id;
 		this.stars = stars;
@@ -84,6 +89,15 @@ public class Rating implements Serializable {
 		this.changedBy = changedBy;
 		this.product = product;
 		this.user = user;
+		this.content = content;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getId() {
