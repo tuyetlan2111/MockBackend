@@ -46,6 +46,12 @@ public static Logger logger = LoggerFactory.getLogger(OrderDetailController.clas
 
 		return orderDetail.get();
 	}
+	@GetMapping("/show-user/{id}")
+	public OrderDetail retrieveProductUser(@PathVariable int id) throws Exception {
+		OrderDetail orderDetail = orderDetailService.findByUserId(id);
+
+		return orderDetail;
+	}
 	
 	@PostMapping("/create")
 	public ResponseEntity<Object> createOrder(@RequestBody OrderDetail orderDetail) {

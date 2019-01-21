@@ -19,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fresher.web.entity.Order;
+import com.fresher.web.entity.OrderDetail;
 import com.fresher.web.entity.Product;
 import com.fresher.web.entity.Rating;
+import com.fresher.web.service.OrderDetailService;
 import com.fresher.web.service.ProductService;
 import com.fresher.web.service.RatingService;
 
@@ -35,6 +38,9 @@ public class RatingController {
 
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	OrderDetailService detailService;
 	
 	@GetMapping("/show")
 	public List<Rating> retrieveAllRatings() {
@@ -53,18 +59,26 @@ public class RatingController {
 		return rating;
 	}
 	@PostMapping("/create")
-	public ResponseEntity<Object> createRating(@RequestBody Rating rating) {
-		Rating savedRating = ratingService.save(rating);
-		Product product = rating.getProduct();
-		int star = ratingService.getAverageRating(product.getId());
+	public Rating createRating(@RequestBody Rating rating) {
+		OrderDetail detail = detailService.findByUserId(rating.getUser().getId());
 		
-		product.setAvgStars(star);
-		productService.save(product);
+		if(detail!=null) {
+			
+			List<Rating> rts = ratingService.findByProductIdAndUserId(rating.getProduct().getId(), rating.getUser().getId());
+			if(rts.size() == 0) {
+				Rating savedRating = ratingService.save(rating);
+				Product product = rating.getProduct();
+				int star = ratingService.getAverageRating(product.getId());
+				
+				product.setAvgStars(star);
+				productService.save(product);
+				
+				return rating;
+			}
+			
+		}
 		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(savedRating.getId()).toUri();
-
-		return ResponseEntity.created(location).build();
+		return null;
 
 	}
 
