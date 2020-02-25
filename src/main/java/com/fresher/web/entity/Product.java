@@ -41,6 +41,11 @@ public class Product implements Serializable{
 	@NotNull
 	@Column(name = "Title", columnDefinition = "NVARCHAR(100)")
 	private String title;
+
+	@Basic
+	@NotNull
+	@Column(name = "Name", columnDefinition = "NVARCHAR(100)")
+	private String name;
 	
 	@Basic
 	@NotNull
@@ -49,7 +54,7 @@ public class Product implements Serializable{
 	
 	@Basic
 	@NotNull
-	@Column(name = "Image", columnDefinition = "NVARCHAR(30)")
+	@Column(name = "Image", columnDefinition = "NVARCHAR(100)")
 	private String image;
 	
 	@Basic
@@ -106,7 +111,7 @@ public class Product implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(@NotBlank @NotNull int id, @NotBlank @NotNull String title, @NotBlank @NotNull String description,
+	public Product(@NotBlank @NotNull int id, @NotBlank @NotNull String title, @NotBlank @NotNull String name, @NotBlank @NotNull String description,
 			@NotBlank @NotNull String image, @NotBlank @NotNull float price, @NotBlank @NotNull int quantitySold,
 			@NotBlank @NotNull float avgStars, @NotBlank @NotNull Date createdOn, @NotBlank @NotNull int createdBy,
 			@NotBlank @NotNull Date changedOn, @NotBlank @NotNull int changedBy,
@@ -114,6 +119,7 @@ public class Product implements Serializable{
 		super();
 		this.id = id;
 		this.title = title;
+		this.name = name;
 		this.description = description;
 		this.image = image;
 		this.price = price;
@@ -142,6 +148,14 @@ public class Product implements Serializable{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -242,7 +256,7 @@ public class Product implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", title=" + title + ", description=" + description + ", image=" + image
+		return "Product [id=" + id + ", title=" + title + ", name=" + name + ",  description=" + description + ", image=" + image
 				+ ", price=" + price + ", quantitySold=" + quantitySold + ", avgStars=" + avgStars + ", createdOn="
 				+ createdOn + ", createdBy=" + createdBy + ", changedOn=" + changedOn + ", changedBy=" + changedBy
 				+ ", orderDetailCollection=" + orderDetailCollection + ", cartItemCollection=" + cartItemCollection

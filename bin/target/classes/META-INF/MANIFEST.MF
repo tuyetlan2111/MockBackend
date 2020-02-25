@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: admin
+Build-Jdk: 11.0.4
+Implementation-Title: Fresher_Frontend
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.fresher
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/Fresher_Frontend
+Created-By: Maven Integration for Eclipse
+
